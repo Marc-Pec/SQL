@@ -1,3 +1,5 @@
+---Queired Country Population Database
+
 CREATE TABLE countries(
    name                    TEXT PRIMARY KEY,
    population              INTEGER,
@@ -214,19 +216,26 @@ INSERT INTO countries(name,population,percent_one_year_change,population_change,
 
 SELECT * FROM countries;
 
+---What is the average population accross all countries in the database?
 SELECT AVG(population) AS avg_population FROM countries;
 
+---What country has the largest population?
 SELECT name, MAX(population) AS maximum_population FROM countries;
 
+---What country has the smallest population?
 SELECT name, MIN(population) AS minimum_population FROM countries;
 
+---What is the average population change?
 SELECT AVG(population_change) FROM countries;
 
+---Which countries have a population greater than 40,000,000 while also having their population increasing by atleast 500,000?
 SELECT * FROM countries WHERE population >40000000 AND population_change >=500000;
 
+---What is the average median age of the countries that have a median age greater than 30, grouped in acsending order?
 SELECT name, AVG(median_age) AS Average_median_age FROM countries GROUP BY median_age HAVING Average_median_age >30;
 
 
+---I grouped countries in three categories to show the different growth rates based on their percent one year change in population.
 SELECT COUNT(*),
 CASE
     WHEN percent_one_year_change >=2 THEN "Fast Growth"
@@ -235,7 +244,8 @@ CASE
     END AS Country_Growth
     FROM countries GROUP BY Country_Growth;
     
-
+---What countries have a density per sq. Km. greater that 2,000 or an area greater than 1,000,000 sq. km?
 SELECT * FROM countries WHERE density_per_sq_km >2000 OR area_sq_km >1000000;
 
+---What countries have ateast 1 miragnt and account for greater than 1% of the worlds population?
 SELECT * FROM countries WHERE net_migrants >1 AND percent_of_world_pop >1;
