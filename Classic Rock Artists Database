@@ -1,3 +1,5 @@
+---Create a database of Classic Rock Artists and their associated bands.
+
 CREATE TABLE Artists
 (id INTEGER PRIMARY KEY, name TEXT, band TEXT);
 
@@ -8,6 +10,8 @@ INSERT INTO Artists ("name", "band") VALUES
 ("Don Henley", "Eagles"),
 ("Angus Young", "AC/DC");
 
+
+---Create a database of above artists favorite songs with the songs album and year.
 
 CREATE TABLE Songs
 (id INTEGER PRIMARY KEY, name TEXT, album TEXT, year INTEGER, artist_id INTEGER);
@@ -38,11 +42,17 @@ VALUES
 ("You Shook Me All Nigth Long", "Back In Black", 1980, 5),
 ("It's A Long Way To The Top(If You Wanna Rock'n'Roll')", "High Voltage", 1980, 5);
 
+
+--- Join the Songs database with Artists database, include the artist name, band name, song name and album. Order them by song name.
+
 SELECT a.name, a.band, s.name AS song_name, s.album
 FROM Artists a
 OUTER LEFT JOIN Songs s
 ON a.id=s.artist_id
 ORDER BY s.name;
+
+
+---Show all the albums that were released after 1970, and include the bands name.
 
 SELECT a.band, s.album, s.year
 FROM Artists a
