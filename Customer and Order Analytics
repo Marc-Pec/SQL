@@ -61,3 +61,47 @@ WHERE quantity >2
 AND length(orderid) = 6 
 AND orderid <> 'Order ID';
 
+
+--- Show all the order timestamps in February between 02/13/19 and 02/18/19.
+
+SELECT orderdate
+FROM BIT_DB.FebSales
+WHERE orderdate between '02/13/19 00:00' 
+AND '02/18/19 00:00';
+
+
+--- What order was placed in February on February 2nd 2019 at 1:35?
+
+SELECT location
+From BIT_DB.FebSales
+WHERE orderdate = '02/18/19 01:35';
+
+
+--- How many orders were placed on February 18th 2019?
+
+SELECT sum(quantity)
+FROM BIT_DB.FebSales
+WHERE orderdate like '02/18/19%';
+
+
+--- What are all the battery products sold in January 2019? 
+
+SELECT distinct product
+FROM BIT_DB.FebSales
+WHERE product like '%Batteries%';
+
+
+--- What are the products that their price ended in .99, and what are their prices?
+
+SELECT distinct product, price
+FROM BIT_DB.FebSales
+WHERE price like '%.99';
+
+
+---List all the products sold in Los Angeles in February, and include how many of each were sold.
+
+SELECT product, sum(quantity)
+FROM BIT_DB.FebSales
+WHERE location like '%Los Angeles%'
+GROUP BY product;
+
