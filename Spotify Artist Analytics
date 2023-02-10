@@ -28,15 +28,28 @@ time_signature integer NOT NULL );
 
 SELECT * FROM BIT_DB.Spotifydata;
 
-# First I determined who the top 10 artist are by popularity.
+
+--- First I determined who the top 10 artist are by popularity.
 
 SELECT artist_name, track_name, popularity
 FROM BIT_DB.Spotifydata
 ORDER BY popularity desc
 LIMIT 10;
 
-# Then I explored the average dancebility by artist and track.
+
+--- Then I explored the average dancebility by artist and track.
 
 SELECT artist_name, track_name, avg(danceability)
 FROM BIT_DB.Spotifydata
 GROUP BY artist_name;
+
+
+--- Then I wanted to see all the tracks whose popularity was greater than the average popular song.
+
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+WHERE popularity > (SELECT avg(popularity) FROM BIT_DB.Spotifydata)
+GROUP BY popularity
+ORDER BY popularity DESC;
+
+
