@@ -55,3 +55,14 @@ ON e.employeeid=c.supportRepid
 WHERE c.country = 'USA'
 ORDER BY e.firstname;
 
+
+#7 What customer had the largest order for 2013?
+
+SELECT c.firstname, c.lastname, ROUND(sum(items.unitprice*items.quantity),2) AS 'Order_Cost'
+FROM Chinook.customers c
+LEFT JOIN Chinook.invoices i
+ON c.customerid=i.customerid
+JOIN Chinook.invoice_items items
+ON items.invoicelineid=i.invoiceid
+WHERE i.invoicedate BETWEEN '2013-01-01' AND '2013-12-31'
+ORDER BY Order_Cost;
