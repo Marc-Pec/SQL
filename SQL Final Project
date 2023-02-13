@@ -1,0 +1,57 @@
+
+
+
+
+#1 Show only the customers in Canada.
+
+SELECT customerid, firtname, lastname
+FROM chinook.customers 
+WHERE Country = "Canada";
+
+
+#2 Show all customers who are not in Canada
+
+SELECT customerid, firstname, lastname
+FROM chinook.customers 
+WHERE Country <> "Canada";
+
+
+#3 What employees are managers?
+
+SELECT firstname, lastname, title
+FROM Chinook.employees
+WHERE title LIKE '%manager%';
+
+
+#4 Who is the youngest employee?
+
+SELECT firstname, lastname, birthdate
+FROM Chinook.employees
+ORDER BY birthdate desc
+LIMIT 1;
+
+
+#5 How many invoice orders were made in 2013?
+
+SELECT count(*)
+FROM Chinook.invoices
+WHERE invoicedate BETWEEN '2013-01-01' AND '2013-12-31';
+
+
+#6 Provide a query that shows the invoices associated with each sales agent.
+
+SELECT emp.LastName, emp.Firstname, inv.InvoiceId
+FROM chinook.Employees emp 
+JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+
+#6 Which employees managed invoices for customers in North America and what for what customers?
+
+SELECT distinct e.firstname, e.lastname, c.customerid
+FROM Chinook.employees e
+LEFT JOIN Chinook.customers c
+ON e.employeeid=c.supportRepid
+WHERE c.country = 'USA'
+ORDER BY e.firstname;
+
