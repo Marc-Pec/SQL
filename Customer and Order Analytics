@@ -152,3 +152,11 @@ FROM BIT_DB.JanSales
 GROUP BY product
 Order by sum(quantity*price) desc
 LIMIT 1;
+
+--- Which product brought in the leave revenue in January and how much revenue did it bring in total?
+
+SELECT distinct product, sum(quantity*price) AS Revenue
+FROM BIT_DB.JanSales
+GROUP BY product
+Order by sum(quantity*price) asc
+LIMIT 1;
